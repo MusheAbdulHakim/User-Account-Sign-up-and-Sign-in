@@ -1,3 +1,23 @@
+<?php 
+  require_once 'includes/library.php';
+  $app = new AppLib();
+  if (isset($_POST['register'])) {
+    $fullname = htmlspecialchars($_POST['fullname']);
+    $username = htmlspecialchars($_POST['username']);
+    $email = htmlspecialchars($_POST['email']);
+    $password = htmlspecialchars($_POST['password']);
+    $confirmpass = htmlspecialchars($_POST['confirm_password']);
+    if ($password == $confirmpass) {
+          $app->Register($fullname,$username,$email,$password);
+    }else{
+      echo "<script>alert('your passwords does not match')</script>";
+    }    
+  }elseif (isset($_POST['login'])) {
+   $username = htmlspecialchars($_POST['username']);
+   $password = htmlspecialchars($_POST['password']);
+   $app->Login($username,$password);
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,17 +34,17 @@
     <div class="container">
       <div class="forms-container">
         <div class="signin-signup">
-          <form action="#" class="sign-in-form">
+          <form method="post" class="sign-in-form">
             <h2 class="title">Sign in</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input name="username" type="text" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input name="password" type="password" placeholder="Password" />
             </div>
-            <input type="submit" value="Login" class="btn solid" />
+            <input type="submit" name="login" value="Login" class="btn solid" />
             <p class="social-text">Or Sign in with social platforms</p>
             <div class="social-media">
               <a href="#" class="social-icon">
@@ -41,21 +61,29 @@
               </a>
             </div>
           </form>
-          <form action="#" class="sign-up-form">
+          <form method="post" class="sign-up-form">
             <h2 class="title">Sign up</h2>
             <div class="input-field">
               <i class="fas fa-user"></i>
-              <input type="text" placeholder="Username" />
+              <input required name="fullname" type="text" placeholder="Full Name" />
+            </div>
+            <div class="input-field">
+              <i class="fas fa-user"></i>
+              <input required name="username" type="text" placeholder="Username" />
             </div>
             <div class="input-field">
               <i class="fas fa-envelope"></i>
-              <input type="email" placeholder="Email" />
+              <input name="email" required type="email" placeholder="Email" />
             </div>
             <div class="input-field">
               <i class="fas fa-lock"></i>
-              <input type="password" placeholder="Password" />
+              <input name="password" required type="password" placeholder="Password" />
             </div>
-            <input type="submit" class="btn" value="Sign up" />
+            <div class="input-field">
+              <i class="fas fa-lock"></i>
+              <input name="confirm_password" required type="password" placeholder="Confirm Password" />
+            </div>
+            <input type="submit" name="register" class="btn" value="Sign up" />
             <p class="social-text">Or Sign up with social platforms</p>
             <div class="social-media">
               <a href="#" class="social-icon">
