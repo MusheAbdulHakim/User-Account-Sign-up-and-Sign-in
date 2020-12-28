@@ -1,4 +1,6 @@
 # User-Account-Sign-up-and-Sign-in
+The form templates was forked from 
+https://github.com/sefyudem/Sliding-Sign-In-Sign-Up-Form
 
 #screenshots
 
